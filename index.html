@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>कृषी-मित्र | Modern AgriTech Portal</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;600;700;800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-green: #2E7D32;
+            --dark-green: #1B5E20;
+            --light-green: #E8F5E9;
+            --accent-orange: #F57C00;
+            --text-dark: #1F2937;
+            --text-gray: #4B5563;
+            --bg-color: #F9FAFB;
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { font-family: 'Mukta', sans-serif; background-color: var(--bg-color); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(46, 125, 50, 0); } 100% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0); } }
+        @keyframes scrollMarquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+        /* HEADER */
+        header { position: fixed; top: 0; width: 100%; z-index: 1000; background: var(--glass-bg); backdrop-filter: blur(15px); border-bottom: 1px solid var(--glass-border); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease; }
+        .logo { font-size: 2.2rem; font-weight: 800; color: var(--primary-green); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .logo i { color: var(--accent-orange); }
+        nav { display: flex; gap: 30px; align-items: center; }
+        nav a { text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 1.15rem; position: relative; padding: 5px 0; transition: 0.3s; }
+        nav a::after { content: ''; position: absolute; width: 0; height: 3px; bottom: 0; left: 0; background-color: var(--accent-orange); transition: width 0.3s; }
+        nav a:hover::after { width: 100%; }
+        nav a:hover { color: var(--primary-green); }
+        .btn-login { background: var(--primary-green); color: white; padding: 10px 25px; border-radius: 30px; text-decoration: none; font-weight: bold; font-size: 1rem; box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3); transition: 0.3s; cursor: pointer; border: none; }
+        .btn-login:hover { background: var(--dark-green); transform: translateY(-2px); }
+
+        /* HERO SECTION */
+        .hero { position: relative; height: 90vh; min-height: 600px; background: linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover; display: flex; align-items: center; padding: 0 5%; margin-top: 75px; }
+        .hero-content { max-width: 750px; color: white; animation: fadeIn 1s ease-out; }
+        .hero-content h1 { font-size: 4rem; line-height: 1.15; margin-bottom: 20px; font-weight: 800; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); }
+        .hero-content h1 span { color: var(--accent-orange); }
+        .hero-content p { font-size: 1.3rem; margin-bottom: 30px; opacity: 0.95; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+        
+        .search-box { display: flex; background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); padding: 8px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.3); max-width: 520px; }
+        .search-box input { flex: 1; background: transparent; border: none; outline: none; color: white; padding: 10px 20px; font-size: 1.1rem; }
+        .search-box input::placeholder { color: rgba(255,255,255,0.8); }
+        .search-box button { background: var(--accent-orange); color: white; border: none; padding: 12px 30px; border-radius: 30px; font-weight: bold; font-size: 1rem; cursor: pointer; transition: 0.3s; }
+        .search-box button:hover { background: #E65100; }
+
+        /* Weather Glass Widget */
+        .weather-widget { position: absolute; right: 5%; bottom: 12%; background: var(--glass-bg); backdrop-filter: blur(15px); padding: 22px 28px; border-radius: 20px; border: 1px solid var(--glass-border); box-shadow: var(--shadow); display: flex; align-items: center; gap: 20px; animation: fadeIn 1.5s ease-out; }
+        .weather-icon { font-size: 3.2rem; color: #FDB813; }
+        .weather-info h3 { font-size: 1.6rem; color: var(--text-dark); margin: 0; font-family: 'Poppins', sans-serif; font-weight: 700; }
+        .weather-info p { color: var(--text-gray); font-size: 0.95rem; margin: 0; }
+
+        /* SERVICES SECTION */
+        .services-section { padding: 90px 5%; background: var(--bg-color); text-align: center; }
+        .section-title { font-size: 2.6rem; color: var(--primary-green); margin-bottom: 10px; font-weight: 800; }
+        .section-subtitle { color: var(--text-gray); font-size: 1.25rem; margin-bottom: 50px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .service-card { background: white; padding: 45px 25px; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04); transition: all 0.4s ease; border-bottom: 5px solid transparent; cursor: pointer; }
+        .service-card:hover { transform: translateY(-10px); border-bottom: 5px solid var(--primary-green); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        .service-icon { width: 85px; height: 85px; background: var(--light-green); color: var(--primary-green); font-size: 2.6rem; line-height: 85px; border-radius: 50%; margin: 0 auto 25px auto; transition: 0.3s; }
+        .service-card:hover .service-icon { background: var(--primary-green); color: white; animation: pulseGlow 1.5s infinite; }
+        .service-card h3 { font-size: 1.5rem; margin-bottom: 12px; color: var(--text-dark); font-weight: 700; }
+        .service-card p { color: var(--text-gray); font-size: 1rem; }
+
+        /* MARKET SECTION */
+        .market-section { padding: 70px 0; background: #fff; }
+        .ticker-wrap { background: var(--primary-green); padding: 12px 0; overflow: hidden; position: relative; display: flex; align-items: center; color: white; margin-bottom: 40px; }
+        .ticker-title { background: var(--dark-green); padding: 12px 30px; font-weight: bold; font-size: 1.2rem; z-index: 10; box-shadow: 4px 0 10px rgba(0,0,0,0.3); white-space: nowrap; }
+        .ticker-content { display: flex; white-space: nowrap; animation: scrollMarquee 30s linear infinite; gap: 50px; padding-left: 20px; font-size: 1.15rem; }
+        .ticker-item span { color: #A5D6A7; font-family: 'Poppins', sans-serif; font-weight: bold; }
+        .api-status-box { text-align: center; margin-bottom: 25px; }
+        .api-status { display: inline-block; padding: 6px 18px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; }
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; padding: 0 5%; }
+        .market-card { background: var(--bg-color); border: 1px solid #E5E7EB; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        .market-header { background: var(--primary-green); color: white; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .market-header h3 { margin: 0; font-size: 1.4rem; font-weight: 700; }
+        .market-body { padding: 20px; min-height: 260px; }
+        .market-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px dashed #D1D5DB; }
+        .market-row:last-child { border: none; }
+        .crop-name { font-weight: 700; color: var(--text-dark); font-size: 1.1rem; }
+        .crop-price { color: var(--primary-green); font-weight: 700; font-family: 'Poppins', sans-serif; font-size: 1.25rem; display: flex; align-items: center; gap: 6px; }
+        .trend-up { color: #10B981; font-size: 0.9rem; }
+        .trend-down { color: #EF4444; font-size: 0.9rem; }
+
+        /* CROP ADVISORY */
+        .advisory-section { padding: 90px 5%; background: var(--light-green); }
+        .advisory-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; }
+        .adv-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); transition: 0.3s; }
+        .adv-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .adv-img { width: 100%; height: 220px; object-fit: cover; }
+        .adv-content { padding: 25px; }
+        .adv-tag { background: #FEF3C7; color: #D97706; padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; display: inline-block; margin-bottom: 15px; }
+        .adv-content h3 { font-size: 1.55rem; margin-bottom: 10px; color: var(--primary-green); font-weight: 700; }
+        .adv-content p { color: var(--text-gray); margin-bottom: 20px; font-size: 1rem; }
+        .read-more { color: var(--accent-orange); text-decoration: none; font-weight: bold; font-size: 1.1rem; display: flex; align-items: center; gap: 6px; transition: 0.2s; }
+        .read-more:hover { gap: 12px; }
+
+        /* MODALS (Login & Service Details) */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 2000; }
+        .modal-box { background: white; padding: 35px; border-radius: 20px; width: 100%; max-width: 400px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); position: relative; animation: fadeIn 0.3s ease-out; }
+        .service-modal-box { max-width: 500px; text-align: left; }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #6B7280; }
+        .modal-box h2 { color: var(--primary-green); margin-bottom: 20px; font-size: 1.8rem; text-align: center; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 5px; }
+        .form-group input { width: 100%; padding: 12px; border: 1px solid #D1D5DB; border-radius: 8px; font-size: 1rem; outline: none; }
+        .form-group input:focus { border-color: var(--primary-green); }
+        .btn-submit { width: 100%; padding: 12px; background: var(--primary-green); color: white; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .btn-submit:hover { background: var(--dark-green); }
+        .switch-text { text-align: center; margin-top: 15px; font-size: 0.95rem; }
+        .switch-text a { color: var(--accent-orange); text-decoration: none; font-weight: bold; cursor: pointer; }
+
+        /* FOOTER */
+        footer { background: #111827; color: #9CA3AF; padding: 70px 5% 25px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-logo { font-size: 2.2rem; color: white; font-weight: 800; margin-bottom: 20px; display: block; text-decoration: none; }
+        .footer-logo span { color: var(--primary-green); }
+        .footer-col h4 { color: white; font-size: 1.25rem; margin-bottom: 20px; position: relative; padding-bottom: 10px; }
+        .footer-col h4::after { content: ''; position: absolute; left: 0; bottom: 0; width: 50px; height: 2px; background: var(--primary-green); }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: #9CA3AF; text-decoration: none; transition: 0.3s; font-size: 1rem; }
+        .footer-col ul li a:hover { color: var(--primary-green); padding-left: 6px; }
+        .social-icons a { display: inline-block; width: 42px; height: 42px; background: rgba(255,255,255,0.1); text-align: center; line-height: 42px; border-radius: 50%; color: white; margin-right: 10px; transition: 0.3s; }
+        .social-icons a:hover { background: var(--primary-green); transform: translateY(-3px); }
+        .copyright { text-align: center; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.95rem; }
+
+        @media (max-width: 900px) {
+            .hero-content h1 { font-size: 2.8rem; }
+            nav { display: none; }
+            .weather-widget { position: static; margin-top: 25px; }
+            .hero { flex-direction: column; justify-content: center; text-align: center; height: auto; padding: 100px 5% 50px; }
+            .search-box { margin: 0 auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header id="navbar">
+        <a href="#" class="logo"><i class="fas fa-leaf"></i> कृषी<span>-मित्र</span></a>
+        <nav>
+            <a href="#">होम</a>
+            <a href="#services">आमच्या सेवा</a>
+            <a href="#market">बाजारभाव</a>
+            <a href="#advisory">पीक सल्ला</a>
+            <a href="#">योजना</a>
+        </nav>
+        <button class="btn-login" id="authBtn" onclick="openModal()">लॉगिन / नोंदणी</button>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>शेतकरी मित्रांनो, <br><span>कृषी-मित्र</span> वर स्वागत आहे!</h1>
+            <p>आधुनिक शेतीची माहिती, रोजचे अचूक बाजारभाव, आणि हवामानाचा अंदाज आता तुमच्या मोबाईलवर, एका क्लिकवर.</p>
+            
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="पिकाचे नाव इंग्रजीत शोधा (उदा. Onion, Cotton)...">
+                <button onclick="searchCrop()"><i class="fas fa-search"></i> शोधा</button>
+            </div>
+            
+            <div id="searchResults" style="display: none; background: rgba(255, 255, 255, 0.95); padding: 15px; border-radius: 10px; margin-top: 15px; color: #1F2937; max-height: 250px; overflow-y: auto; box-shadow: 0 4px 15px rgba(0,0,0,0.2); text-align: left;">
+            </div>
+        </div>
+
+        <div class="weather-widget">
+            <i class="fas fa-sun weather-icon" id="weatherIcon"></i>
+            <div class="weather-info">
+                <h3 id="weatherTemp">लोड होत आहे...</h3>
+                <p id="weatherLocation">लोकेशन शोधत आहे...</p>
+                <p id="weatherDesc" style="font-size: 0.85rem; color: var(--primary-green); font-weight: bold;"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- USER DASHBOARD (नवीन सिक्रेट सेक्शन - सुरुवातीला लपलेला असेल) -->
+    <section id="userDashboard" style="display: none; padding: 40px 5%; background: var(--light-green);">
+        <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); animation: fadeIn 0.5s ease;">
+            <h2 style="color: var(--primary-green); margin-bottom: 10px; font-size: 2rem;">
+                <i class="fas fa-user-circle"></i> नमस्कार, <span id="dashUserName" style="color: var(--accent-orange);">शेतकरी</span>!
+            </h2>
+            <p style="color: var(--text-gray); margin-bottom: 25px; font-size: 1.1rem;">तुमच्या वैयक्तिकृत डॅशबोर्डवर स्वागत आहे.</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+                <div style="padding: 20px; border: 1px solid #E5E7EB; border-radius: 15px; text-align: center; background: #F9FAFB;">
+                    <h4 style="color: var(--accent-orange); font-size: 1.2rem;"><i class="fas fa-heart"></i> तुमचे आवडते पीक</h4>
+                    <p style="font-weight: bold; font-size: 1.4rem; margin-top: 10px; color: var(--text-dark);">कापूस, सोयाबीन</p>
+                </div>
+                <div style="padding: 20px; border: 1px solid #E5E7EB; border-radius: 15px; text-align: center; background: #F9FAFB;">
+                    <h4 style="color: var(--primary-green); font-size: 1.2rem;"><i class="fas fa-cloud"></i> हवामान अलर्ट</h4>
+                    <p style="margin-top: 10px; font-size: 1rem; color: var(--text-gray);">पुढील ३ दिवस पावसाची शक्यता नाही. फवारणीसाठी योग्य वेळ.</p>
+                </div>
+                <div style="padding: 20px; border: 1px solid #E5E7EB; border-radius: 15px; text-align: center; background: var(--primary-green); color: white; cursor: pointer; transition: 0.3s;" onclick="document.getElementById('market').scrollIntoView({behavior: 'smooth'});" onmouseover="this.style.background='var(--dark-green)'" onmouseout="this.style.background='var(--primary-green)'">
+                    <h4 style="font-size: 1.2rem; color: white;">आजचे बाजारभाव पहा</h4>
+                    <i class="fas fa-arrow-right" style="margin-top: 15px; font-size: 1.8rem;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES (Updated with onclick function) -->
+    <section id="services" class="services-section">
+        <h2 class="section-title">आमच्या सेवा</h2>
+        <p class="section-subtitle">शेतीला आधुनिक बनवण्यासाठी लागणारी सर्व माहिती एकाच ठिकाणी उपलब्ध.</p>
+        <div class="grid-4">
+            <div class="service-card" onclick="showServiceDetails('apmc')">
+                <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>बाजारभाव (APMC)</h3>
+                <p>महाराष्ट्रातील सर्व प्रमुख कृषी उत्पन्न बाजार समित्यांमधील रोजचे ताजे भाव.</p>
+            </div>
+            <div class="service-card" onclick="showServiceDetails('crop')">
+                <div class="service-icon"><i class="fas fa-seedling"></i></div>
+                <h3>पीक व्यवस्थापन</h3>
+                <p>पेरणीपासून ते काढणीपर्यंत खते, फवारणी आणि कीडरोग नियंत्रणाची अचूक माहिती.</p>
+            </div>
+            <div class="service-card" onclick="showServiceDetails('weather')">
+                <div class="service-icon"><i class="fas fa-cloud-sun-rain"></i></div>
+                <h3>हवामान अंदाज</h3>
+                <p>येत्या ५ दिवसांचा अचूक हवामान अंदाज आणि पावसाची माहिती थेट तुमच्या गावात.</p>
+            </div>
+            <div class="service-card" onclick="showServiceDetails('scheme')">
+                <div class="service-icon"><i class="fas fa-file-signature"></i></div>
+                <h3>सरकारी योजना</h3>
+                <p>शेतकऱ्यांसाठी असणाऱ्या ट्रॅक्टर, विहीर आणि सोलर सबसिडीचे ऑनलाईन फॉर्म्स.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MARKET SECTION -->
+    <section id="market" class="market-section">
+        <div class="ticker-wrap">
+            <div class="ticker-title">🔴 LIVE बाजारभाव</div>
+            <div class="ticker-content" id="liveTicker">
+                <div class="ticker-item">लासलगाव कांदा: <span>₹२,४५०/क्विंटल</span> <i class="fas fa-arrow-up trend-up"></i></div>
+                <div class="ticker-item">लातूर सोयाबीन: <span>₹४,५५०/क्विंटल</span> <i class="fas fa-arrow-down trend-down"></i></div>
+                <div class="ticker-item">जळगाव कापूस: <span>₹७,१५०/क्विंटल</span> <i class="fas fa-arrow-up trend-up"></i></div>
+                <div class="ticker-item">पुणे टोमॅटो: <span>₹१,२५०/क्विंटल</span> <i class="fas fa-minus" style="color:yellow; margin-left:5px;"></i></div>
+                <div class="ticker-item">छ. संभाजीनगर मका: <span>₹१,९५०/क्विंटल</span> <i class="fas fa-arrow-up trend-up"></i></div>
+            </div>
+        </div>
+
+        <div class="api-status-box">
+            <div id="apiStatus" class="api-status"><i class="fas fa-spinner fa-spin"></i> Live Data Loading...</div>
+        </div>
+
+        <h2 class="section-title" style="text-align: center;">आजचे प्रमुख बाजारभाव</h2>
+        <p class="section-subtitle" style="text-align: center;">(थेट कृषी उत्पन्न बाजार समित्यांकडून प्राप्त दर)</p>
+
+        <div class="market-grid">
+            <div class="market-card">
+                <div class="market-header"><h3 id="m-title-1">छत्रपती संभाजीनगर मंडई</h3><span style="font-size: 0.9rem;"><i class="fas fa-circle" style="color:#10B981; font-size:0.6rem;"></i> Live</span></div>
+                <div class="market-body" id="apmc-data-1"></div>
+            </div>
+            <div class="market-card">
+                <div class="market-header" style="background: var(--accent-orange);"><h3 id="m-title-2">लासलगाव (नाशिक) मंडई</h3><span style="font-size: 0.9rem;"><i class="fas fa-circle" style="color:#10B981; font-size:0.6rem;"></i> Live</span></div>
+                <div class="market-body" id="apmc-data-2"></div>
+            </div>
+            <div class="market-card">
+                <div class="market-header" style="background: #1F2937;"><h3 id="m-title-3">लातूर कृषी मंडई</h3><span style="font-size: 0.9rem;"><i class="fas fa-circle" style="color:#10B981; font-size:0.6rem;"></i> Live</span></div>
+                <div class="market-body" id="apmc-data-3"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CROP ADVISORY (Updated Photos and Link to khodmashi.html) -->
+    <section id="advisory" class="advisory-section">
+        <h2 class="section-title" style="text-align: center;">🌾 पीक सल्ला व आधुनिक शेती</h2>
+        <p class="section-subtitle" style="text-align: center;">सध्याच्या हंगामातील पिकांचे योग्य व्यवस्थापन कसे करावे?</p>
+        <div class="advisory-grid">
+            <!-- Article 1 (Link updated to khodmashi.html) -->
+            <div class="adv-card">
+                
+                <div class="adv-content">
+                    <span class="adv-tag">खरीप हंगाम</span>
+                    <h3>सोयाबीनवरील 'खोडमाशी' नियंत्रण कसे करावे?</h3>
+                    <p>सध्या ढगाळ वातावरणामुळे सोयाबीनवर खोडमाशीचा प्रादुर्भाव वाढत आहे. याची लक्षणे आणि अचूक फवारणी जाणून घ्या...</p>
+                    <a href="khodmashi.html" class="read-more">पूर्ण माहिती वाचा <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <!-- Article 2 (New HD Cotton Image) -->
+            <div class="adv-card">
+                
+                <div class="adv-content">
+                    <span class="adv-tag">फवारणी सल्ला</span>
+                    <h3>कापूस पिकातील 'बोंडअळी' व्यवस्थापन</h3>
+                    <p>कापसाची पाती गळत असल्यास कोणती काळजी घ्यावी? योग्य औषधांची यादी आणि प्रतिबंधात्मक उपाय...</p>
+                    <a href="bondali.html" class="read-more">पूर्ण माहिती वाचा <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <!-- Article 3 (New HD Tractor Image) -->
+            <div class="adv-card">
+                <div class="adv-content">
+                    <span class="adv-tag">सरकारी योजना</span>
+                    <h3>महाडीबीटी: ट्रॅक्टर आणि अवजारे अनुदान</h3>
+                    <p>महाराष्ट्र शासनाच्या कृषी यांत्रिकीकरण योजनेंतर्गत ट्रॅक्टरसाठी ५०% अनुदान मिळवण्यासाठी आवश्यक कागदपत्रे...</p>
+                    <a href="mahadbt.html" class="read-more">ऑनलाईन अर्ज करा <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOGIN MODAL POPUP -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">खाते लॉगिन करा</h2>
+            <form id="authForm" onsubmit="handleAuth(event)">
+                <div class="form-group">
+                    <label>ईमेल पत्ता (Email)</label>
+                    <input type="email" id="userEmail" required placeholder="example@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label>पासवर्ड (Password)</label>
+                    <input type="password" id="userPassword" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-submit" id="submitBtn">लॉगिन करा</button>
+            </form>
+            <div class="switch-text" id="switchText">
+                अकाउंट नाहीये? <a onclick="toggleAuthMode()">नवीन नोंदणी करा (Sign Up)</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SERVICE DETAILS MODAL -->
+    <div class="modal-overlay" id="serviceDetailsModal">
+        <div class="modal-box service-modal-box">
+            <span class="close-btn" onclick="document.getElementById('serviceDetailsModal').style.display='none'">&times;</span>
+            <h2 id="sdTitle" style="text-align: left; border-bottom: 2px solid var(--light-green); padding-bottom: 10px;">सेवेचे नाव</h2>
+            <div id="sdContent" style="color: var(--text-gray); font-size: 1.1rem; margin-top: 15px; margin-bottom: 25px;">
+                माहिती येथे दिसेल.
+            </div>
+            <button id="sdActionBtn" class="btn-submit" style="width: auto; padding: 10px 25px;" onclick="document.getElementById('serviceDetailsModal').style.display='none'">पुढे जा</button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col"><a href="#" class="footer-logo"><i class="fas fa-leaf"></i> कृषी<span>-मित्र</span></a><p>शेतकऱ्यांच्या प्रगतीसाठी बनवलेले महाराष्ट्राचे नंबर १ कृषी पोर्टल.
+                कृषी-मित्र' हा खऱ्या अर्थाने शेतकऱ्यांचा एक 'डिजिटल मित्र' आहे. माहिती शोधण्यासाठी शेतकऱ्यांना वेगवेगळ्या ठिकाणी जाण्याची गरज नाही; बाजारभाव, हवामान, पीक सल्ला आणि योजना हे सगळं एकाच ठिकाणी
+                 उपलब्ध करून देणारं हे महाराष्ट्राचं नंबर १ कृषी पोर्टल आहे!</p></div>
+            <div class="footer-col"><h4>महत्वाच्या लिंक्स</h4><ul><li><a href="#market">आजचे बाजारभाव</a></li><li><a href="#advisory">पीक सल्ला</a></li></ul></div>
+            <div class="footer-col"><h4>संपर्क</h4><ul><li><b>Vinayak susar</b> <br> Kolegaon Tq: bhokardan Dist: jalna 
+                <br>Chhatrapati Sambhajinagar</li><li>vinayaksusar@gmail.com</li></ul></div>
+        </div>
+        <div class="copyright"><p>&copy; 2026 कृषी-मित्र | Designed & Developed by <strong>Vinayak Group</strong>.</p></div>
+    </footer>
+
+    <!-- ================= FIREBASE & JAVASCRIPT ================= -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBR_mVDhoU7b9v4zYn5BXGywIaqpLAiO0A",
+            authDomain: "krushi-mitra-6204b.firebaseapp.com",
+            projectId: "krushi-mitra-6204b",
+            storageBucket: "krushi-mitra-6204b.appspot.com",
+            messagingSenderId: "311794633163",
+            appId: "1:311794633163:web:231eab41d62b07ce814e4e",
+            measurementId: "G-XCE8V0FBZM"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        let isSignUp = false;
+
+        window.openModal = function() { document.getElementById('authModal').style.display = 'flex'; }
+        window.closeModal = function() { document.getElementById('authModal').style.display = 'none'; }
+
+        window.toggleAuthMode = function() {
+            isSignUp = !isSignUp;
+            const title = document.getElementById('modalTitle');
+            const btn = document.getElementById('submitBtn');
+            const switchTxt = document.getElementById('switchText');
+
+            if(isSignUp) {
+                title.innerText = 'नवीन नोंदणी करा (Sign Up)';
+                btn.innerText = 'रजिस्टर करा';
+                switchTxt.innerHTML = 'आधीच अकाउंट आहे? <a onclick="toggleAuthMode()">लॉगिन करा</a>';
+            } else {
+                title.innerText = 'खाते लॉगिन करा';
+                btn.innerText = 'लॉगिन करा';
+                switchTxt.innerHTML = 'अकाउंट नाहीये? <a onclick="toggleAuthMode()">नवीन नोंदणी करा (Sign Up)</a>';
+            }
+        }
+
+        window.handleAuth = async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('userEmail').value;
+            const password = document.getElementById('userPassword').value;
+
+            try {
+                if(isSignUp) {
+                    await createUserWithEmailAndPassword(auth, email, password);
+                    alert("नोंदणी यशस्वीरीत्या पूर्ण झाली!");
+                } else {
+                    await signInWithEmailAndPassword(auth, email, password);
+                    alert("सफलतापूर्वक लॉगिन झाले!");
+                }
+                closeModal();
+            } catch (error) {
+                alert("एरर: " + error.message);
+            }
+        }
+
+        // --- DASHBOARD LOGIC ---
+        onAuthStateChanged(auth, (user) => {
+            const authBtn = document.getElementById('authBtn');
+            const dashboard = document.getElementById('userDashboard');
+            const dashName = document.getElementById('dashUserName');
+
+            if (user) {
+                let uName = user.email.split('@')[0]; 
+                authBtn.innerText = uName + " (Logout)";
+                authBtn.onclick = async () => {
+                    await signOut(auth);
+                    alert("Logout !");
+                };
+                dashboard.style.display = "block";
+                dashName.innerText = uName;
+            } else {
+                authBtn.innerText = "लॉगिन / नोंदणी";
+                authBtn.onclick = openModal;
+                dashboard.style.display = "none";
+            }
+        });
+    </script>
+
+    <script>
+        // --- SERVICE DETAILS LOGIC ---
+        const serviceData = {
+            'apmc': {
+                title: '<i class="fas fa-chart-line" style="color:var(--primary-green);"></i> बाजारभाव (APMC)',
+                desc: 'भारत सरकारच्या अधिकृत API द्वारे आम्ही महाराष्ट्रातील सर्व प्रमुख कृषी उत्पन्न बाजार समित्यांचा (Mandi) डेटा थेट तुमच्यापर्यंत पोहोचवतो. <br><br><b>वैशिष्ट्ये:</b><br>• रोजचे ताजे आणि अचूक दर<br>• थेट सरकारी सर्व्हरशी कनेक्ट<br>• पिकांनुसार सोपा शोध',
+                btnText: 'बाजारभाव पहा',
+                target: 'market'
+            },
+            'crop': {
+                title: '<i class="fas fa-seedling" style="color:var(--primary-green);"></i> पीक व्यवस्थापन',
+                desc: 'कोणते पीक कधी घ्यावे, फवारणीचे योग्य वेळापत्रक आणि खत व्यवस्थापन कसे करावे, याची सविस्तर माहिती तुम्हाला येथे मिळेल. <br><br>आमच्या पीक सल्लागारांच्या टीमकडून ወቅतीवर मिळणारे अलर्ट्स तुम्हाला संभाव्य नुकसानीपासून वाचवतील.',
+                btnText: 'पीक सल्ला पहा',
+                target: 'advisory'
+            },
+            'weather': {
+                title: '<i class="fas fa-cloud-sun-rain" style="color:var(--primary-green);"></i> हवामान अंदाज',
+                desc: 'शेतकऱ्यांसाठी अचूक हवामान माहिती अत्यंत महत्त्वाची असते. आमची सिस्टीम तुमच्या अचूक GPS लोकेशनचा वापर करून तुम्हाला थेट तुमच्या गावचे तापमान आणि पावसाची माहिती देते.<br><br>आता फवारणी करण्यापूर्वी हवामान तपासायला विसरू नका!',
+                btnText: 'ओके, समजले',
+                target: 'none'
+            },
+            'scheme': {
+                title: '<i class="fas fa-file-signature" style="color:var(--primary-green);"></i> सरकारी योजना',
+                desc: 'महाडीबीटी (MahaDBT) द्वारे ट्रॅक्टर अनुदान, शेततळे, ठिबक सिंचन आणि विहिरींसाठी ऑनलाइन अर्ज कसा करावा याची सर्व माहिती येथे उपलब्ध आहे.<br><br><b>महत्त्वाची कागदपत्रे:</b> 7/12, 8अ, आधार कार्ड, बँक पासबुक.',
+                btnText: 'माहिती पहा',
+                target: 'advisory'
+            }
+        };
+
+        function showServiceDetails(type) {
+            const data = serviceData[type];
+            document.getElementById('sdTitle').innerHTML = data.title;
+            document.getElementById('sdContent').innerHTML = data.desc;
+            
+            const actionBtn = document.getElementById('sdActionBtn');
+            actionBtn.innerText = data.btnText;
+            
+            actionBtn.onclick = function() {
+                document.getElementById('serviceDetailsModal').style.display = 'none';
+                if(data.target !== 'none') {
+                    document.getElementById(data.target).scrollIntoView({behavior: 'smooth'});
+                }
+            };
+            
+            document.getElementById('serviceDetailsModal').style.display = 'flex';
+        }
+
+        // --- DYNAMIC GEOLOCATION WEATHER API ---
+        async function fetchWeatherData(lat, lon, locationName) {
+            try {
+                const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
+                const data = await res.json();
+                
+                const temp = Math.round(data.current_weather.temperature);
+                const isDay = data.current_weather.is_day;
+                
+                document.getElementById('weatherTemp').innerText = temp + "°C";
+                document.getElementById('weatherLocation').innerText = locationName;
+                document.getElementById('weatherDesc').innerText = isDay ? "निरभ्र आकाश (Clear Sky)" : "रात्र (Clear Night)";
+                
+                const icon = document.getElementById('weatherIcon');
+                if(!isDay) {
+                    icon.className = "fas fa-moon weather-icon";
+                    icon.style.color = "#4B5563"; 
+                } else {
+                    icon.className = "fas fa-sun weather-icon";
+                    icon.style.color = "#FDB813"; 
+                }
+            } catch (e) {
+                console.log("Weather API error", e);
+                document.getElementById('weatherTemp').innerText = "--°C";
+                document.getElementById('weatherLocation').innerText = "माहिती उपलब्ध नाही";
+            }
+        }
+
+        function fetchLiveWeather() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(async (position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    
+                    try {
+                        const geoRes = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`);
+                        const geoData = await geoRes.json();
+                        const city = geoData.city || geoData.locality || "तुमचे शहर";
+                        const state = geoData.principalSubdivision || "महाराष्ट्र";
+                        fetchWeatherData(lat, lon, `${city}, ${state}`);
+                    } catch (e) {
+                        fetchWeatherData(lat, lon, "तुमचे लोकेशन");
+                    }
+                }, (error) => {
+                    console.log("Location access denied.");
+                    fetchWeatherData(19.8762, 75.3433, "छत्रपती संभाजीनगर, महाराष्ट्र");
+                });
+            } else {
+                fetchWeatherData(19.8762, 75.3433, "छत्रपती संभाजीनगर, महाराष्ट्र");
+            }
+        }
+
+        // APMC Live API Logic
+        const API_KEY = "579b464db66ec23bdd0000013d443852c5224eec6b2c532997cbeb36"; 
+
+        async function fetchLiveMarketRates() {
+            const statusBadge = document.getElementById('apiStatus');
+            try {
+                const apiUrl = `https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=${API_KEY}&format=json&filters[state]=Maharashtra&limit=15`;
+                const response = await fetch(apiUrl);
+                const liveData = await response.json();
+
+                if (liveData && liveData.records && liveData.records.length > 0) {
+                    statusBadge.innerHTML = "<i class='fas fa-check-circle'></i> डेटा भारत सरकार सर्व्हरवरून थेट LIVE आहे";
+                    statusBadge.style.background = "#D1FAE5";
+                    statusBadge.style.color = "#065F46";
+                    
+                    renderMarketRows('apmc-data-1', liveData.records.slice(0, 5));
+                    renderMarketRows('apmc-data-2', liveData.records.slice(5, 10));
+                    renderMarketRows('apmc-data-3', liveData.records.slice(10, 15));
+                } else {
+                    throw new Error("No live records found");
+                }
+            } catch (error) {
+                statusBadge.innerHTML = "<i class='fas fa-exclamation-triangle'></i> सर्व्हर त्रुटी - जुना डेटा दाखवत आहे";
+                statusBadge.style.background = "#FEE2E2";
+                statusBadge.style.color = "#991B1B";
+                loadFallbackData();
+            }
+        }
+
+        function renderMarketRows(containerId, items) {
+            const container = document.getElementById(containerId);
+            let html = '';
+            items.forEach(item => {
+                let crop = item.commodity || item.crop;
+                let location = item.market ? `(${item.market})` : '';
+                let price = item.modal_price || item.avg;
+                html += `
+                    <div class="market-row">
+                        <div class="crop-name">${crop} <span style="font-size:0.85rem; color:#6B7280;">${location}</span></div>
+                        <div class="crop-price">₹${price} <i class="fas fa-arrow-up trend-up"></i></div>
+                    </div>
+                `;
+            });
+            html += `<div style="text-align:center; margin-top:15px;"><a href="#" style="color:var(--primary-green); font-weight:bold; text-decoration:none;">संपूर्ण यादी पहा <i class="fas fa-angle-right"></i></a></div>`;
+            container.innerHTML = html;
+        }
+
+        function loadFallbackData() {
+            const data1 = [{ crop: 'कापूस (Cotton)', avg: 7150 }, { crop: 'मका (Maize)', avg: 1950 }, { crop: 'बाजरी (Millet)', avg: 2400 }];
+            const data2 = [{ crop: 'उन्हाळ कांदा', avg: 2450 }, { crop: 'लाल कांदा', avg: 1800 }, { crop: 'सोयाबीन', avg: 4350 }];
+            const data3 = [{ crop: 'सोयाबीन पिवळा', avg: 4550 }, { crop: 'टोमॅटो', avg: 1250 }, { crop: 'लसूण', avg: 8500 }];
+            renderMarketRows('apmc-data-1', data1);
+            renderMarketRows('apmc-data-2', data2);
+            renderMarketRows('apmc-data-3', data3);
+        }
+
+        async function searchCrop() {
+            const query = document.getElementById('searchInput').value.trim();
+            const resultBox = document.getElementById('searchResults');
+            if(!query) { alert("कृपया शोधण्यासाठी पिकाचे नाव टाका!"); return; }
+            
+            resultBox.style.display = "block";
+            resultBox.innerHTML = "<i class='fas fa-spinner fa-spin' style='color:#2E7D32;'></i> शोधत आहे...";
+
+            try {
+                const apiUrl = `https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=${API_KEY}&format=json&filters[state]=Maharashtra&limit=100`;
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                
+                if(data && data.records) {
+                    const matches = data.records.filter(item => 
+                        (item.commodity && item.commodity.toLowerCase().includes(query.toLowerCase())) || 
+                        (item.market && item.market.toLowerCase().includes(query.toLowerCase()))
+                    );
+
+                    if(matches.length > 0) {
+                        let html = `<h4 style="color:#2E7D32; margin-bottom:10px; border-bottom:1px solid #ccc; padding-bottom:5px;">'${query}' साठी आजचे बाजारभाव:</h4>`;
+                        matches.forEach(m => {
+                            html += `
+                                <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px dashed #ddd; padding:8px 0;">
+                                    <span><b>${m.commodity}</b> <span style="font-size:0.85rem; color:#6B7280;">(${m.market})</span></span>
+                                    <span style="color:#2E7D32; font-weight:bold; font-size:1.1rem;">₹${m.modal_price}</span>
+                                </div>
+                            `;
+                        });
+                        resultBox.innerHTML = html;
+                    } else {
+                        resultBox.innerHTML = `<p style="color:red; font-weight:bold; margin:0;">'${query}' साठी आज कोणताही डेटा उपलब्ध नाही.</p>`;
+                    }
+                }
+            } catch(e) {
+                resultBox.innerHTML = "<p style='color:red; margin:0;'>सर्व्हर त्रुटी!</p>";
+            }
+        }
+
+        window.onload = () => {
+            fetchLiveMarketRates();
+            fetchLiveWeather();
+        };
+    </script>
+</body>
+</html>

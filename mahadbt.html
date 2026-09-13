@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>महाडीबीटी: ट्रॅक्टर आणि अवजारे अनुदान | कृषी-मित्र</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;600;700;800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-green: #2E7D32;
+            --dark-green: #1B5E20;
+            --light-green: #E8F5E9;
+            --accent-orange: #F57C00;
+            --bg-color: #F9FAFB;
+            --text-dark: #1F2937;
+            --text-gray: #4B5563;
+            --border-color: #E5E7EB;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Mukta', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-dark); line-height: 1.8; overflow-x: hidden; }
+        
+        /* 1. HEADER (Fixed) */
+        header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 15px 5%; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
+        .logo { font-size: 2.2rem; font-weight: 800; color: var(--primary-green); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .logo span { color: var(--accent-orange); }
+        .back-btn { background: white; color: var(--text-dark); padding: 8px 25px; border-radius: 30px; text-decoration: none; font-weight: bold; border: 1px solid var(--border-color); transition: 0.3s; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        .back-btn:hover { background: var(--primary-green); color: white; border-color: var(--primary-green); transform: translateY(-2px); }
+
+        /* 2. MAIN LAYOUT (Grid) */
+        .page-wrapper { max-width: 1200px; margin: 40px auto; padding: 0 5%; display: grid; grid-template-columns: 2.5fr 1fr; gap: 40px; }
+
+        /* Left Side: Article Content */
+        .article-header { margin-bottom: 30px; animation: fadeIn 0.8s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .tag { background: #FEF3C7; color: #D97706; padding: 6px 18px; border-radius: 20px; font-weight: bold; font-size: 0.95rem; display: inline-block; margin-bottom: 15px; }
+        .article-title { font-size: 3rem; color: var(--primary-green); margin-bottom: 20px; font-weight: 800; line-height: 1.2; }
+        .article-meta { display: flex; gap: 20px; color: var(--text-gray); font-size: 1rem; margin-bottom: 30px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; }
+        .article-meta span { display: flex; align-items: center; gap: 8px; }
+
+        /* Reliable Image */
+        .hero-img { width: 100%; height: 500px; object-fit: cover; border-radius: 24px; box-shadow: 0 15px 40px rgba(0,0,0,0.08); margin-bottom: 40px; }
+
+        /* Content Styling */
+        .content-box { background: white; padding: 45px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); font-size: 1.15rem; color: var(--text-gray); }
+        .content-box p { margin-bottom: 25px; }
+        .content-box h3 { color: var(--text-dark); font-size: 1.8rem; margin: 40px 0 20px; font-weight: 700; position: relative; padding-bottom: 10px; }
+        .content-box h3::after { content: ''; position: absolute; left: 0; bottom: 0; width: 60px; height: 3px; background: var(--accent-orange); border-radius: 5px; }
+        
+        .content-box ul { margin-left: 25px; margin-bottom: 30px; list-style-type: none; }
+        .content-box ul li { margin-bottom: 15px; position: relative; padding-left: 30px; }
+        .content-box ul li::before { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; left: 0; top: 2px; color: var(--primary-green); font-size: 1.1rem; }
+
+        /* Official Link Box */
+        .apply-box { background: linear-gradient(135deg, #FFF3CD, #ffffff); padding: 35px; border-radius: 20px; border: 1px solid #FFEBA1; margin-top: 40px; text-align: center; }
+        .apply-box h4 { color: #856404; font-size: 1.6rem; margin-bottom: 15px; font-weight: 700; }
+        .apply-box p { color: #6B7280; font-size: 1rem; margin-bottom: 20px; }
+        .btn-apply { display: inline-block; padding: 15px 35px; background: var(--accent-orange); color: white; border-radius: 30px; text-decoration: none; font-size: 1.2rem; font-weight: bold; box-shadow: 0 10px 20px rgba(245, 124, 0, 0.3); transition: 0.3s; }
+        .btn-apply:hover { background: #E65100; transform: translateY(-3px); }
+
+        /* 3. Right Side: Sidebar Layout */
+        .sidebar { position: sticky; top: 100px; height: max-content; }
+        
+        .sidebar-widget { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 30px; border: 1px solid var(--border-color); }
+        .sidebar-widget h4 { font-size: 1.3rem; color: var(--text-dark); margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+        
+        /* Quick Stats Widget */
+        .stat-row { display: flex; justify-content: space-between; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px dashed var(--border-color); font-size: 1.05rem; }
+        .stat-row:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+        .stat-label { color: var(--text-gray); }
+        .stat-value { font-weight: 700; color: var(--primary-green); font-family: 'Poppins', sans-serif; }
+
+        /* Table of Contents Widget */
+        .toc-list { list-style: none; margin-left: 0; }
+        .toc-list li { margin-bottom: 12px; }
+        .toc-list a { color: var(--text-gray); text-decoration: none; transition: 0.2s; font-size: 1.05rem; display: flex; align-items: center; gap: 10px; }
+        .toc-list a::before { content: ''; width: 6px; height: 6px; background: var(--accent-orange); border-radius: 50%; display: inline-block; }
+        .toc-list a:hover { color: var(--primary-green); padding-left: 5px; }
+
+        /* FAQ Section (Accordion Style) */
+        .faq-section { margin-top: 50px; }
+        .faq-box { background: white; border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 15px; overflow: hidden; }
+        .faq-question { padding: 18px 25px; background: #F9FAFB; cursor: pointer; font-weight: 700; font-size: 1.15rem; display: flex; justify-content: space-between; align-items: center; color: var(--text-dark); }
+        .faq-question:hover { background: var(--light-green); color: var(--primary-green); }
+        .faq-answer { padding: 0 25px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; color: var(--text-gray); }
+        
+        @media (max-width: 992px) {
+            .page-wrapper { grid-template-columns: 1fr; }
+            .sidebar { position: static; }
+            .article-title { font-size: 2.4rem; }
+            .hero-img { height: 300px; }
+            .content-box { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <a href="index.html" class="logo"><i class="fas fa-leaf"></i> कृषी<span>-मित्र</span></a>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> होम पेज</a>
+    </header>
+
+    <div class="page-wrapper">
+        
+        <!-- LEFT: MAIN CONTENT -->
+        <main>
+            <div class="article-header">
+                <span class="tag"><i class="fas fa-tractor"></i> सरकारी योजना</span>
+                <h1 class="article-title">महाडीबीटी: ट्रॅक्टर आणि कृषी अवजारे अनुदान</h1>
+                <div class="article-meta">
+                    <span><i class="far fa-calendar-alt"></i> ९ सप्टेंबर २०२६</span>
+                    <span><i class="fas fa-university"></i> कृषी विभाग, महाराष्ट्र शासन</span>
+                    <span><i class="far fa-clock"></i> ३ मिनिटे वाचन</span>
+                </div>
+            </div>
+
+            <!-- Reliable Image (Wikimedia Tractor) -->
+            <img src="mahadbt.jpg" alt="Tractor in farm" class="hero-img">
+
+            <div class="content-box">
+                <p>शेतकऱ्यांचे उत्पन्न वाढवण्यासाठी आणि शेतीतील कष्ट कमी करण्यासाठी महाराष्ट्र शासनातर्फे <strong>'कृषी यांत्रिकीकरण उप-अभियान'</strong> राबवले जाते. या योजनेअंतर्गत महाडीबीटी (MahaDBT) पोर्टलद्वारे ट्रॅक्टर, पॉवर टिलर आणि इतर कृषी अवजारे खरेदी करण्यासाठी सरकारकडून थेट अनुदान दिले जाते.</p>
+
+                <h3 id="eligibility">अनुदानासाठी पात्रता (Eligibility)</h3>
+                <p>या योजनेचा लाभ घेण्यासाठी शेतकऱ्यांनी खालील अटी पूर्ण करणे आवश्यक आहे:</p>
+                <ul>
+                    <li>शेतकरी महाराष्ट्राचा रहिवासी असावा आणि त्याच्याकडे आधार कार्ड असावे.</li>
+                    <li>शेतकऱ्याच्या नावावर स्वतःची शेतजमीन (७/१२ व ८अ उतारा) असावी.</li>
+                    <li>ट्रॅक्टर अनुदानासाठी शेतकऱ्याकडे किमान १ एकर शेती असणे आवश्यक आहे.</li>
+                    <li>एका कुटुंबातील (७/१२ उताऱ्यावरील) एकाच व्यक्तीला या योजनेचा लाभ घेता येतो.</li>
+                    <li>जर शेतकऱ्याने यापूर्वी ट्रॅक्टर किंवा अवजारांसाठी अनुदान घेतले असेल, तर त्याला पुढील १० वर्षे त्याच अवजारासाठी पुन्हा अर्ज करता येणार नाही.</li>
+                </ul>
+
+                <h3 id="documents">आवश्यक कागदपत्रे (Documents Required)</h3>
+                <p>ऑनलाईन अर्ज करताना आणि लॉटरी लागल्यानंतर खालील कागदपत्रे लागतात:</p>
+                <ul>
+                    <li>७/१२ व ८-अ उतारा (नवीन काढलेला).</li>
+                    <li>आधार कार्ड आणि आधार कार्डशी लिंक असलेले बँक पासबुक.</li>
+                    <li>खरेदी करावयाच्या ट्रॅक्टर किंवा अवजाराचे कोटेशन (Quotation) आणि केंद्र शासनाचा टेस्ट रिपोर्ट.</li>
+                    <li>जातीचा दाखला (फक्त SC किंवा ST प्रवर्गातील शेतकऱ्यांसाठी).</li>
+                </ul>
+
+                <h3 id="subsidy">अनुदानाचे स्वरूप (Subsidy Details)</h3>
+                <p>या योजनेअंतर्गत खुल्या प्रवर्गातील शेतकऱ्यांसाठी साधारणपणे <strong>४०%</strong> आणि अनुसूचित जाती/जमाती (SC/ST) व महिला शेतकऱ्यांसाठी <strong>५०%</strong> पर्यंत अनुदान दिले जाते. (शासनाने ठरवून दिलेल्या कमाल मर्यादेच्या अधीन राहून).</p>
+
+                <!-- MAHADBT ONLINE APPLY BOX -->
+                <div class="apply-box" id="apply">
+                    <h4><i class="fas fa-laptop"></i> ऑनलाईन अर्ज करा</h4>
+                    <p>महाडीबीटी पोर्टलवर 'शेतकरी योजना' या पर्यायावर क्लिक करून तुम्ही स्वतःच्या मोबाईलवरून किंवा जवळच्या CSC सेंटरवरून अर्ज करू शकता.</p>
+                    <!-- Official MahaDBT Link -->
+                    <a href="https://mahadbt.maharashtra.gov.in/Farmer/Login/Login" target="_blank" class="btn-apply">
+                        महाडीबीटी पोर्टलवर जा <i class="fas fa-external-link-alt" style="margin-left: 8px;"></i>
+                    </a>
+                </div>
+
+                <!-- FAQ Section -->
+                <h3 id="faq" style="margin-top: 60px;">शेतकऱ्यांचे वारंवार विचारले जाणारे प्रश्न (FAQ)</h3>
+                <div class="faq-section">
+                    <div class="faq-box">
+                        <div class="faq-question" onclick="toggleFAQ(this)">१. लाभार्थ्यांची निवड कशी होते? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer"><p style="padding: 15px 0;">महाडीबीटी पोर्टलवर आलेल्या अर्जांमधून संगणकीय सोडत (Online Lottery) पद्धतीने लाभार्थ्यांची निवड केली जाते. निवड झाल्यावर शेतकऱ्याला SMS द्वारे कळवले जाते.</p></div>
+                    </div>
+                    <div class="faq-box">
+                        <div class="faq-question" onclick="toggleFAQ(this)">२. जुन्या (Second-Hand) ट्रॅक्टरवर अनुदान मिळते का? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer"><p style="padding: 15px 0;">नाही, महाडीबीटी योजनेअंतर्गत फक्त शासनाने मान्यता दिलेल्या नवीन ट्रॅक्टर आणि अवजारांवरच अनुदान मिळते.</p></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- RIGHT: SIDEBAR -->
+        <aside class="sidebar">
+            
+            <!-- Widget 1: Quick Stats -->
+            <div class="sidebar-widget">
+                <h4><i class="fas fa-info-circle" style="color: var(--accent-orange);"></i> थोडक्यात माहिती</h4>
+                <div class="stat-row"><span class="stat-label">योजनेचे नाव</span><span class="stat-value">कृषी यांत्रिकीकरण</span></div>
+                <div class="stat-row"><span class="stat-label">पोर्टल</span><span class="stat-value">महाडीबीटी (MahaDBT)</span></div>
+                <div class="stat-row"><span class="stat-label">अनुदान</span><span class="stat-value" style="color: var(--primary-green);">४०% ते ५०% पर्यंत</span></div>
+                <div class="stat-row"><span class="stat-label">अर्ज पद्धत</span><span class="stat-value">ऑनलाईन लॉटरी</span></div>
+            </div>
+
+            <!-- Widget 2: Table of Contents -->
+            <div class="sidebar-widget">
+                <h4><i class="fas fa-list-ul" style="color: var(--primary-green);"></i> अनुक्रमणिका</h4>
+                <ul class="toc-list">
+                    <li><a href="#eligibility">अनुदानासाठी पात्रता</a></li>
+                    <li><a href="#documents">आवश्यक कागदपत्रे</a></li>
+                    <li><a href="#subsidy">अनुदानाचे स्वरूप</a></li>
+                    <li><a href="#apply" style="color: var(--accent-orange); font-weight: bold;">ऑनलाईन अर्ज करा</a></li>
+                    <li><a href="#faq">शेतकऱ्यांचे प्रश्न (FAQ)</a></li>
+                </ul>
+            </div>
+            
+            <!-- Action Button -->
+            <button onclick="window.print()" style="width: 100%; padding: 15px; background: var(--primary-green); color: white; border: none; border-radius: 15px; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);">
+                <i class="fas fa-print"></i> माहिती प्रिंट करा
+            </button>
+
+        </aside>
+    </div>
+
+    <!-- Script for FAQ Accordion -->
+    <script>
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            if (answer.style.maxHeight) {
+                answer.style.maxHeight = null;
+                icon.className = "fas fa-chevron-down";
+                element.style.color = "var(--text-dark)";
+            } else {
+                const allAnswers = document.querySelectorAll('.faq-answer');
+                const allIcons = document.querySelectorAll('.faq-question i');
+                allAnswers.forEach(ans => ans.style.maxHeight = null);
+                allIcons.forEach(i => i.className = "fas fa-chevron-down");
+                document.querySelectorAll('.faq-question').forEach(q => q.style.color = "var(--text-dark)");
+
+                answer.style.maxHeight = answer.scrollHeight + "px";
+                icon.className = "fas fa-chevron-up";
+                element.style.color = "var(--primary-green)";
+            }
+        }
+    </script>
+</body>
+</html>

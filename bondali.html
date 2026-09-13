@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>कापूस पिकातील बोंडअळी व्यवस्थापन | कृषी-मित्र</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;600;700;800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-green: #2E7D32;
+            --dark-green: #1B5E20;
+            --light-green: #E8F5E9;
+            --accent-orange: #F57C00;
+            --bg-color: #F9FAFB;
+            --text-dark: #1F2937;
+            --text-gray: #4B5563;
+            --border-color: #E5E7EB;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Mukta', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-dark); line-height: 1.8; overflow-x: hidden; }
+        
+        /* 1. HEADER (Fixed) */
+        header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 15px 5%; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
+        .logo { font-size: 2.2rem; font-weight: 800; color: var(--primary-green); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .logo span { color: var(--accent-orange); }
+        .back-btn { background: white; color: var(--text-dark); padding: 8px 25px; border-radius: 30px; text-decoration: none; font-weight: bold; border: 1px solid var(--border-color); transition: 0.3s; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        .back-btn:hover { background: var(--primary-green); color: white; border-color: var(--primary-green); transform: translateY(-2px); }
+
+        /* 2. MAIN LAYOUT (Grid) */
+        .page-wrapper { max-width: 1200px; margin: 40px auto; padding: 0 5%; display: grid; grid-template-columns: 2.5fr 1fr; gap: 40px; }
+
+        /* Left Side: Article Content */
+        .article-header { margin-bottom: 30px; animation: fadeIn 0.8s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .tag { background: #FEF3C7; color: #D97706; padding: 6px 18px; border-radius: 20px; font-weight: bold; font-size: 0.95rem; display: inline-block; margin-bottom: 15px; }
+        .article-title { font-size: 3rem; color: var(--primary-green); margin-bottom: 20px; font-weight: 800; line-height: 1.2; }
+        .article-meta { display: flex; gap: 20px; color: var(--text-gray); font-size: 1rem; margin-bottom: 30px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; }
+        .article-meta span { display: flex; align-items: center; gap: 8px; }
+
+        /* Reliable Image */
+        .hero-img { width: 100%; height: 500px; object-fit: cover; border-radius: 24px; box-shadow: 0 15px 40px rgba(0,0,0,0.08); margin-bottom: 40px; }
+
+        /* Content Styling */
+        .content-box { background: white; padding: 45px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); font-size: 1.15rem; color: var(--text-gray); }
+        .content-box p { margin-bottom: 25px; }
+        .content-box h3 { color: var(--text-dark); font-size: 1.8rem; margin: 40px 0 20px; font-weight: 700; position: relative; padding-bottom: 10px; }
+        .content-box h3::after { content: ''; position: absolute; left: 0; bottom: 0; width: 60px; height: 3px; background: var(--accent-orange); border-radius: 5px; }
+        
+        .content-box ul { margin-left: 25px; margin-bottom: 30px; list-style-type: none; }
+        .content-box ul li { margin-bottom: 15px; position: relative; padding-left: 30px; }
+        .content-box ul li::before { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; left: 0; top: 2px; color: var(--primary-green); font-size: 1.1rem; }
+
+        /* Advanced Medicine Box */
+        .medicine-box { background: linear-gradient(135deg, var(--light-green), #ffffff); padding: 35px; border-radius: 20px; border: 1px solid #A5D6A7; margin-top: 40px; position: relative; overflow: hidden; }
+        .medicine-box::before { content: '\f0e4'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; right: -20px; bottom: -20px; font-size: 12rem; color: rgba(46, 125, 50, 0.05); transform: rotate(-15deg); }
+        .medicine-box h4 { color: var(--dark-green); font-size: 1.6rem; margin-bottom: 20px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+        
+        .medicine-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; }
+        .med-item { background: white; padding: 15px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; font-family: 'Poppins', sans-serif; font-weight: 600; color: var(--text-dark); box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        .med-item span { display: block; font-family: 'Mukta', sans-serif; font-weight: 400; color: var(--text-gray); font-size: 0.9rem; margin-top: 5px; }
+
+        .warning-text { background: #FFF3CD; color: #856404; padding: 15px 20px; border-radius: 10px; font-size: 1rem; border-left: 4px solid #FFEBA1; margin-top: 25px; display: flex; gap: 12px; align-items: flex-start; }
+
+        /* 3. Right Side: Sidebar Layout */
+        .sidebar { position: sticky; top: 100px; height: max-content; }
+        
+        .sidebar-widget { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 30px; border: 1px solid var(--border-color); }
+        .sidebar-widget h4 { font-size: 1.3rem; color: var(--text-dark); margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+        
+        /* Quick Stats Widget */
+        .stat-row { display: flex; justify-content: space-between; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px dashed var(--border-color); font-size: 1.05rem; }
+        .stat-row:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+        .stat-label { color: var(--text-gray); }
+        .stat-value { font-weight: 700; color: var(--primary-green); font-family: 'Poppins', sans-serif; }
+
+        /* Table of Contents Widget */
+        .toc-list { list-style: none; margin-left: 0; }
+        .toc-list li { margin-bottom: 12px; }
+        .toc-list a { color: var(--text-gray); text-decoration: none; transition: 0.2s; font-size: 1.05rem; display: flex; align-items: center; gap: 10px; }
+        .toc-list a::before { content: ''; width: 6px; height: 6px; background: var(--accent-orange); border-radius: 50%; display: inline-block; }
+        .toc-list a:hover { color: var(--primary-green); padding-left: 5px; }
+
+        /* FAQ Section (Accordion Style) */
+        .faq-section { margin-top: 50px; }
+        .faq-box { background: white; border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 15px; overflow: hidden; }
+        .faq-question { padding: 18px 25px; background: #F9FAFB; cursor: pointer; font-weight: 700; font-size: 1.15rem; display: flex; justify-content: space-between; align-items: center; color: var(--text-dark); }
+        .faq-question:hover { background: var(--light-green); color: var(--primary-green); }
+        .faq-answer { padding: 0 25px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; color: var(--text-gray); }
+        
+        @media (max-width: 992px) {
+            .page-wrapper { grid-template-columns: 1fr; }
+            .sidebar { position: static; }
+            .article-title { font-size: 2.4rem; }
+            .hero-img { height: 300px; }
+            .content-box { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <a href="index.html" class="logo"><i class="fas fa-leaf"></i> कृषी<span>-मित्र</span></a>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> होम पेज</a>
+    </header>
+
+    <div class="page-wrapper">
+        
+        <!-- LEFT: MAIN CONTENT -->
+        <main>
+            <div class="article-header">
+                <span class="tag"><i class="fas fa-tag"></i> फवारणी सल्ला</span>
+                <h1 class="article-title">कापूस पिकातील 'गुलाबी बोंडअळी' व्यवस्थापन</h1>
+                <div class="article-meta">
+                    <span><i class="far fa-calendar-alt"></i> ९ सप्टेंबर २०२६</span>
+                    <span><i class="fas fa-user-edit"></i> कृषी तज्ज्ञ</span>
+                    <span><i class="far fa-clock"></i> ५ मिनिटे वाचन</span>
+                </div>
+            </div>
+
+            <!-- Reliable Image (From Original Index.html) -->
+            <img src="bondali.jpg" alt="Cotton Field" class="hero-img">
+
+            <div class="content-box">
+                <p>महाराष्ट्रात कापूस हे प्रमुख नगदी पीक (Cash Crop) आहे. परंतु, गेल्या काही वर्षांपासून <strong>शेंदरी किंवा गुलाबी बोंडअळी (Pink Bollworm)</strong> मुळे कापसाच्या उत्पादनात मोठी घट होत आहे. ही अळी थेट कापसाच्या बोंडात शिरत असल्यामुळे बाहेरून फवारलेली औषधे लवकर लागू पडत नाहीत. त्यामुळे याचे एकात्मिक व्यवस्थापन करणे अत्यंत गरजेचे आहे.</p>
+
+                <h3 id="symptoms">प्रादुर्भाव कसा ओळखावा? (लक्षणे)</h3>
+                <p>गुलाबी बोंडअळी थेट बोंडाच्या आत राहते, त्यामुळे ती बाहेरून दिसत नाही. खालील प्रमुख लक्षणांवरून शेतकरी प्रादुर्भाव ओळखू शकतात:</p>
+                <ul>
+                    <li><strong>गुलाबी फुले (Rosette Flowers):</strong> अळी फुलांच्या आत शिरल्यामुळे फुलांच्या पाकळ्या एकमेकांना चिकटून राहतात आणि फुलांचा आकार गुलाबासारखा होतो. हे बोंडअळीचे सर्वात पहिले लक्षण आहे.</li>
+                    <li><strong>पाती व फुले गळणे:</strong> प्रादुर्भावग्रस्त पाती आणि फुले अकाली गळून पडतात.</li>
+                    <li><strong>बोंडांना छिद्रे:</strong> मोठ्या बोंडांना बारीक छिद्रे दिसतात. बोंड फोडून पाहिल्यास आत गुलाबी रंगाची अळी आणि तिची विष्ठा दिसते.</li>
+                    <li><strong>कापसाची प्रत खराब होणे:</strong> अळीने खाल्लेला कापूस पिवळसर पडतो आणि त्याची बाजारातील किंमत कमी होते.</li>
+                </ul>
+
+                <h3 id="prevention">प्रतिबंधात्मक आणि जैविक उपाय</h3>
+                <p>बोंडअळी बोंडात शिरण्याआधीच तिला रोखणे हा सर्वात उत्तम मार्ग आहे:</p>
+                <ul>
+                    <li><strong>कामगंध सापळे (Pheromone Traps):</strong> कापूस पिकात एकरी किमान ५ कामगंध सापळे लावावेत. जर सापळ्यात सलग ३ दिवस ८ ते १० पतंग अडकले, तर फवारणीचा निर्णय घ्यावा.</li>
+                    <li><strong>निंबोळी अर्क:</strong> सुरुवातीच्या काळात ५% निंबोळी अर्काची फवारणी केल्यास अळी अंडी घालत नाही आणि घातलेली अंडी नष्ट होतात.</li>
+                    <li><strong>गुलाबी फुले नष्ट करणे:</strong> शेतातील जी फुले बंद किंवा गुलाबासारखी चिकटलेली दिसतील, ती तोडून अळीसह नष्ट करावीत.</li>
+                </ul>
+
+                <div class="medicine-box" id="treatment">
+                    <h4><i class="fas fa-spray-can"></i> रासायनिक नियंत्रण (फवारणी)</h4>
+                    <p>जेव्हा कामगंध सापळ्यात पतंगांची संख्या वाढेल किंवा ५ ते १० टक्के बोंडांचे नुकसान झालेले दिसेल, तेव्हा खालीलपैकी एका कीटकनाशकाची फवारणी करावी:</p>
+                    
+                    <div class="medicine-grid">
+                        <div class="med-item">Profenofos <span>(प्रोफेनोफॉस ५०% EC)</span><br><b style="color:var(--primary-green);">३० मिली / पंप</b></div>
+                        <div class="med-item">Emamectin <span>(इमामेक्टिन बेन्झोएट ५% SG)</span><br><b style="color:var(--primary-green);">५ ते ७ ग्रॅम / पंप</b></div>
+                        <div class="med-item">Spinosad <span>(स्पिनोसॅड ४५% SC)</span><br><b style="color:var(--primary-green);">५ ते ७ मिली / पंप</b></div>
+                    </div>
+
+                    <div class="warning-text">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 1.5rem;"></i>
+                        <div>
+                            <strong>महत्त्वाची टीप:</strong> एकाच कीटकनाशकाची वारंवार फवारणी करू नये. औषधे आलटून-पालटून फवारावीत जेणेकरून अळीमध्ये प्रतिकारशक्ती (Resistance) तयार होणार नाही.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Section -->
+                <h3 id="faq" style="margin-top: 60px;">शेतकऱ्यांचे वारंवार विचारले जाणारे प्रश्न (FAQ)</h3>
+                <div class="faq-section">
+                    <div class="faq-box">
+                        <div class="faq-question" onclick="toggleFAQ(this)">१. बीटी (Bt) कापसावर बोंडअळी का येते? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer"><p style="padding: 15px 0;">बीटी तंत्रज्ञान हे सुरुवातीच्या काळात बोंडअळीला रोखत होते. मात्र, कालांतराने या अळीने बीटी प्रथिनांविरुद्ध प्रतिकारशक्ती (Resistance) विकसित केली आहे. त्यामुळे आता बीटी कापसावरही बोंडअळीचा प्रादुर्भाव होतो.</p></div>
+                    </div>
+                    <div class="faq-box">
+                        <div class="faq-question" onclick="toggleFAQ(this)">२. निंबोळी अर्क बाजारातील आणावा की घरी बनवावा? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer"><p style="padding: 15px 0;">घरी बनवलेला ५% निंबोळी अर्क सर्वात चांगला आणि स्वस्त असतो. जर घरी बनवणे शक्य नसेल, तर बाजारातील १०,००० ppm (अझाडिरॅक्टिन) असलेले निंबोळी तेल फवारणीसाठी वापरावे.</p></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- RIGHT: SIDEBAR -->
+        <aside class="sidebar">
+            
+            <!-- Widget 1: Quick Stats -->
+            <div class="sidebar-widget">
+                <h4><i class="fas fa-bolt" style="color: var(--accent-orange);"></i> थोडक्यात माहिती</h4>
+                <div class="stat-row"><span class="stat-label">पिकाचे नाव</span><span class="stat-value">कापूस (Cotton)</span></div>
+                <div class="stat-row"><span class="stat-label">कीडीचे नाव</span><span class="stat-value">गुलाबी बोंडअळी</span></div>
+                <div class="stat-row"><span class="stat-label">नुकसानीची पातळी</span><span class="stat-value" style="color: #EF4444;">३० ते ५०% घट</span></div>
+                <div class="stat-row"><span class="stat-label">प्राथमिक नियंत्रण</span><span class="stat-value">कामगंध सापळे</span></div>
+            </div>
+
+            <!-- Widget 2: Table of Contents -->
+            <div class="sidebar-widget">
+                <h4><i class="fas fa-list-ul" style="color: var(--primary-green);"></i> अनुक्रमणिका</h4>
+                <ul class="toc-list">
+                    <li><a href="#symptoms">प्रादुर्भाव कसा ओळखावा?</a></li>
+                    <li><a href="#prevention">प्रतिबंधात्मक उपाय</a></li>
+                    <li><a href="#treatment">रासायनिक फवारणी</a></li>
+                    <li><a href="#faq">शेतकऱ्यांचे प्रश्न (FAQ)</a></li>
+                </ul>
+            </div>
+            
+            <!-- Action Button -->
+            <button onclick="window.print()" style="width: 100%; padding: 15px; background: var(--primary-green); color: white; border: none; border-radius: 15px; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);">
+                <i class="fas fa-print"></i> माहिती प्रिंट करा
+            </button>
+
+        </aside>
+    </div>
+
+    <!-- Script for FAQ Accordion -->
+    <script>
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            if (answer.style.maxHeight) {
+                answer.style.maxHeight = null;
+                icon.className = "fas fa-chevron-down";
+                element.style.color = "var(--text-dark)";
+            } else {
+                const allAnswers = document.querySelectorAll('.faq-answer');
+                const allIcons = document.querySelectorAll('.faq-question i');
+                allAnswers.forEach(ans => ans.style.maxHeight = null);
+                allIcons.forEach(i => i.className = "fas fa-chevron-down");
+                document.querySelectorAll('.faq-question').forEach(q => q.style.color = "var(--text-dark)");
+
+                answer.style.maxHeight = answer.scrollHeight + "px";
+                icon.className = "fas fa-chevron-up";
+                element.style.color = "var(--primary-green)";
+            }
+        }
+    </script>
+</body>
+</html>
